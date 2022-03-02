@@ -1,0 +1,17 @@
+.divLayout {
+  background-color: bisque;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.userWrapper {
+  list-style: none;
+  & > li {
+    margin: 10px 2px;
+    text-align: center;
+    padding: 0;
+  }
+}

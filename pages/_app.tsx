@@ -1,42 +1,25 @@
 // @ts-nocheck
 
 import "../styles/globals.css";
-import type { NextPage } from "next";
-import type { AppProps } from "next/app";
-import type { ReactElement, ReactNode } from "react";
 import { wrapper } from "../modules";
 import App from "next/app";
 import { getUsers } from "../modules/user";
-
-export type NextPageWithLayout = NextPage & {
-  getLayout?: (page: ReactElement) => ReactNode;
-};
-
-type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout;
-};
-
-function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+function MyApp({ Component, pageProps }: any) {
   // const getLayout = Component.getLayout || ((page) => page);
   // return getLayout(<Component {...pageProps} />);
-  console.log("pageProps >> ", pageProps);
   return <Component {...pageProps} />;
 }
 
-MyApp.getInitialProps = async (appContext) => {
-  // calls page's getInitialProps and fills appProps.pageProps
-  const appProps = await App.getInitialProps(appContext);
-  console.log("appProps >> ", appProps);
-
-  const userAgent = appContext.req ? req.headers["user-agent"] : "hello user-agent";
-
-  console.log("userAgent >> ", userAgent);
+MyApp.getInitialProps = wrapper.getInitialAppProps((store) => async (context) => {
+  const { req } = context.ctx;
+  await store.dispatch(getUsers());
   return {
     pageProps: {
-      ...appProps,
-      userAgent,
+      ...(await App.getInitialProps(context)).pageProps,
+      pathname: context.ctx.pathname,
+      userAgent: req ? req.headers["user-agent"] : "default user-agent",
     },
   };
-};
+});
 
 export default wrapper.withRedux(MyApp);

@@ -1,10 +1,20 @@
+//@ts-nocheck
+
 import Layout from "../components/Layout";
 import type { ReactElement } from "react";
-import type { NextPageWithLayout } from "./_app";
 import styles from "../scss-styles/IndexPage.module.scss";
+import styled, { css } from "styled-components";
 
-const Home: NextPageWithLayout = () => {
-  return <div className={styles.indexContainer}></div>;
+const DDIV = styled.div`
+  width: 400px;
+  height: 500px;
+  background-position: center;
+  background-image: url("/img-1.jpg");
+  background-size: cover;
+`;
+
+const Home = () => {
+  return <DDIV>Hello</DDIV>;
 };
 
 Home.getLayout = (page: ReactElement) => {

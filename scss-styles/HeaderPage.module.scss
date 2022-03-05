@@ -1,0 +1,28 @@
+.HeaderContainer {
+  background-color: black;
+  opacity: 0.8;
+  color: white;
+  //   height: 500px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: fixed;
+  width: 100%;
+  height: 100px;
+  text-align: center;
+  z-index: 100;
+
+  .barMenu {
+    position: absolute;
+    top: 50px;
+    left: 70px;
+    transform: translate(-13px, -13px);
+    cursor: pointer;
+  }
+
+  h3 {
+    margin: 0px;
+  }
+}

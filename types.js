@@ -9,3 +9,5 @@ export const RESET = "counter/RESET";
 export const ALL_USERS_SUCCESS = "user/ALL_USERS_SUCCESS";
 export const ALL_USERS_FAIL = "user/ALL_USERS_FAIL";
 export const CLEAR_ERRORS = "user/CLEAR_ERRORS";
+
+export const SIDEBAR_CLICKED = "button/SIDEBAR_CLICKED";

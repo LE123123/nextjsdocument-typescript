@@ -1,0 +1,11 @@
+.GalleryContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 1rem;
+
+  &:nth-child(1) {
+    background-color: red;
+  }
+}

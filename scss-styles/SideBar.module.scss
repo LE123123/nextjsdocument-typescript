@@ -1,0 +1,23 @@
+.UserListContainer {
+  display: flex;
+  align-items: center;
+
+  h3 {
+    padding: 10px;
+  }
+
+  .SideBarUlContainer {
+    list-style: none;
+    padding: 0px;
+    margin-left: 10px;
+    margin-right: 8px;
+
+    li {
+      padding: 10px 2px;
+      &:hover {
+        background-color: darkorange;
+        cursor: pointer;
+      }
+    }
+  }
+}

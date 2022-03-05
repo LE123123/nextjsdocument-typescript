@@ -1,17 +1,16 @@
-const testFunction = async () => {
-  try {
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        console.log("done");
-        resolve("done resolve");
-      }, 1000);
-    });
-    return "done testFunction";
-  } catch (e) {
-    console.error(e);
-    reject(e);
-  }
-};
+function sample(texts, ...fns) {
+  const mockProps = {
+    title: "안녕하세요",
+    body: "내용은 내용내용입니다.",
+  };
 
-const a = Promise.resolve(testFunction());
-a.then(console.log);
+  return texts.reduce(
+    (result, text, i) => `${result}${text}${fns[i] ? fns[i](mockProps) : ""}`,
+    ""
+  );
+}
+
+console.log(sample`
+  제목: ${(props) => props.title}
+  내용: ${(props) => props.body}
+`);

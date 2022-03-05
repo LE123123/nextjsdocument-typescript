@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+.outerDynamicRouting {
+  height: auto;
+  background-color: bisque;
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+  margin-bottom: 20px;
+  border-radius: 30px;
+
+  ul {
+    list-style: none;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 10px;
+
+    li {
+      padding: 10px 2px;
+      font-size: 20px;
+      text-align: center;
+
+      &:hover {
+        background-color: aqua;
+      }
+    }
+  }
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  height: 100%;
+  width: 100%;
+
+  &:hover .faImageIcon {
+    opacity: 1;
+  }
+}
+.faImageIcon {
+  padding: 40px 20px;
+  border-radius: 10px;
+  border: 2px solid white;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.5s;
+}

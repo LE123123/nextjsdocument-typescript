@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
 class MyDocument extends Document {
@@ -15,6 +16,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,wght@1,100&display=swap"
             rel="stylesheet"
           />
+          <script src="https://kit.fontawesome.com/d52c00fcb3.js" />
         </Head>
         <body>
           <Main />

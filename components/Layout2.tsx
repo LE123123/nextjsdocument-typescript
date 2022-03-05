@@ -7,17 +7,7 @@ import { connect } from "react-redux";
 
 const Layout2 = ({ users }) => {
   console.log("Layoutsdfgsdfg2");
-  return (
-    <div>
-      {/* <ul>
-        {users.map((user) => {
-          return <li key={user.id}>{user.name}</li>;
-        })}
-      </ul> */}
-
-      {JSON.stringify(users)}
-    </div>
-  );
+  return <div>{JSON.stringify(users)}</div>;
 };
 Layout2.getInitialProps = ({ store, pathname, query }) => {
   store.dispatch(getUsers());

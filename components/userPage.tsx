@@ -1,12 +1,14 @@
 // @ts-nocheck
 
-import React, { useState, useCallback, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
+import SideBar from "./SideBar";
+import Image from "next/image";
+
 import styles from "../scss-styles/UserProfile.module.scss";
 import styled, { css } from "styled-components";
-import SideBar from "./SideBar";
-import axios from "axios";
-import Image from "next/image";
+
+import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 
 const UserContent_ = styled.div`
   display: block;
@@ -28,20 +30,86 @@ const UserContent_ = styled.div`
     `}
 `;
 
-const Card = styled.div`
-  /* grid-area: ${(props) => props.gridAreaName || ""}; */
+export const Card = styled.div`
+  width: 100%;
+  height: 250px;
+  position: relative;
+  // 애니메이션을 추가해보자
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    opacity: 0;
+    transition: opacity ease 0.5s;
+  }
+
+  &:hover:before {
+    opacity: 1;
+  }
+
+  ${(props) =>
+    props.ImageName === "img-1" &&
+    css`
+      grid-column: 1 / 3;
+    `}
+  ${(props) =>
+    props.ImageName === "img-3" &&
+    css`
+      grid-row: span 2;
+      min-height: 510px;
+    `};
+
+  ${(props) =>
+    props.ImageName === "img-4" &&
+    css`
+      grid-row: span 2;
+      min-height: 510px;
+    `};
+
+  ${(props) =>
+    props.ImageName === "img-7" &&
+    css`
+      grid-column: 2 / span 3;
+    `};
+
+  ${(props) =>
+    props.ImageName === "img-8" &&
+    css`
+      grid-column: span 2;
+    `};
+
+  ${(props) =>
+    props.ImageName === "img-10" &&
+    css`
+      grid-row: span 3;
+      min-height: 770px;
+    `};
+
+  ${(props) =>
+    props.ImageName === "img-15" &&
+    css`
+      grid-column: 2 / span 2;
+    `};
 `;
 
-const Picture = ({ url, imageName }) => {
+export const Picture = ({ url, imageName }) => {
   return (
-    <Card className={imageName}>
-      <Image src={url} alt="image preview" width="1000px" height="1000px" />
-      {/* <img src={url} alt="image preview"></img> */}
+    <Card ImageName={imageName}>
+      <div className={styles.CardInnerDiv1}></div>
+      <div className={styles.CardInnerDiv2}></div>
+      <Image src={url} alt="image preview" layout="fill" className={"image"} />
+      <span className={styles.PictureSpan}>베너에 글씨가 나타나는 부분</span>
     </Card>
   );
 };
 
-const UserContent = ({ sideBarClicked, user, images }) => {
+export const UserContent = ({ sideBarClicked, user, images }) => {
   const renderImage = () => {
     return images.map((x, i) => (
       <Picture key={i} url={x.url} imageName={x.imageName} />
@@ -60,32 +128,10 @@ const UserContent = ({ sideBarClicked, user, images }) => {
   );
 };
 
-const UserPage = ({ userId }) => {
-  const [images, setImages] = useState([]);
+const UserPage = ({ userId, images }) => {
   const { sideBarClicked } = useSelector((state) => state.buttonReducer);
   const { users } = useSelector((state) => state.allUsersReducer);
   const user = users.filter((user) => user.id === userId)[0];
-
-  // first rendering
-  useEffect(() => {
-    const getImages = async () => {
-      let { data } = await axios.get("https://api.unsplash.com/photos/random", {
-        params: {
-          client_id: process.env.UNSPLASH_API_ACCESS_KEY,
-          count: 15,
-        },
-      });
-      // console.log(data);
-      setImages([
-        ...data.map((image, index) => ({
-          imageName: `img-${index + 1}`,
-          url: image.urls.small,
-        })),
-      ]);
-    };
-    getImages();
-  }, []);
-  console.log(images);
 
   return (
     <div className={styles.profileFlexOuterContainer}>
@@ -99,4 +145,4 @@ const UserPage = ({ userId }) => {
   );
 };
 
-export default UserPage;
+export default connect((state) => state.allImageReducer)(UserPage);

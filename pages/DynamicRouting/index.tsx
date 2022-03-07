@@ -8,6 +8,10 @@ import styled, { css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
+import { wrapper } from "../../modules";
+import { getImages } from "../../modules/image";
+import { getUsers } from "../../modules/user";
+
 const GalleryContainer = styled.div`
   width: 100%;
   max-width: 1000px;
@@ -130,5 +134,13 @@ const DynamicRouting = ({ custom }) => {
     </div>
   );
 };
+
+export const getStaticProps = wrapper.getStaticProps(
+  (store) =>
+    async ({ preview }) => {
+      await store.dispatch(getImages());
+      await store.dispatch(getUsers());
+    }
+);
 
 export default DynamicRouting;

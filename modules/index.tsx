@@ -4,6 +4,7 @@ import counterReducer from "./counter";
 import timerReducer from "./timer";
 import allUsersReducer from "./user";
 import buttonReducer from "./button";
+import allImageReducer from "./image";
 
 import { combineReducers, applyMiddleware, createStore } from "redux";
 import { handleActions } from "redux-actions";
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   timerReducer,
   allUsersReducer,
   buttonReducer,
+  allImageReducer,
 });
 
 const reducer = (state, action) => {

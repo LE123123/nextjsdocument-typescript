@@ -3,9 +3,59 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
-  grid-gap: 1rem;
+  grid-gap: 10px;
+  margin: auto;
+  padding-top: 20px;
 
-  &:nth-child(1) {
-    background-color: red;
+  max-width: 830px;
+
+  span.PictureSpan {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 100%;
+    font-size: 15px;
+    color: #fff;
+    font-weight: 900;
+    text-align: center;
+    z-index: 1000;
+    display: none;
+  }
+
+  div.CardInnerDiv1,
+  div.CardInnerDiv2 {
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    transition: all 0.8s;
+  }
+
+  div.CardInnerDiv1 {
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    width: 0;
+  }
+
+  div.CardInnerDiv2 {
+    border-left: 2px solid #fff;
+    border-right: 2px solid #fff;
+    height: 0;
+  }
+
+  div:hover > div.CardInnerDiv1 {
+    width: 95%;
+  }
+
+  div:hover > div.CardInnerDiv2 {
+    height: 95%;
+  }
+
+  div:hover > span.PictureSpan {
+    display: block;
   }
 }

@@ -4,6 +4,7 @@ import React from "react";
 import { getUsers } from "../../modules/user";
 import { wrapper } from "../../modules";
 import { connect } from "react-redux";
+import { getImages } from "../../modules/image";
 
 const Users = ({ users }) => {
   return (
@@ -17,11 +18,12 @@ const Users = ({ users }) => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) =>
-    async ({ req, res, ...etc }) => {
-      await store.dispatch(getUsers());
-    }
-);
+// export const getServerSideProps = wrapper.getServerSideProps(
+//   (store) =>
+//     async ({ req, res, ...etc }) => {
+//       await store.dispatch(getUsers());
+//       await store.dispatch(getImages());
+//     }
+// );
 
 export default connect((state) => state.allUsersReducer)(Users);
